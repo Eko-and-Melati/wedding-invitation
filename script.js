@@ -29,6 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initLangToggle();
   initScrollSpy();
   initScrollAnim();
+  initOpeningCover();
 });
 
 // =====================
@@ -603,6 +604,35 @@ function initScrollAnim() {
   );
 
   sections.forEach(s => obs.observe(s));
+}
+
+// =====================
+// Opening Cover
+// =====================
+function initOpeningCover() {
+  const cover = document.getElementById("opening-cover");
+  const btn = document.getElementById("opening-btn");
+  if (!cover || !btn) return;
+
+  // Skip opening cover in announce mode
+  if (App.mode !== "invite") {
+    cover.remove();
+    return;
+  }
+
+  // Skip if already opened before
+  if (localStorage.getItem("wedding_opened")) {
+    cover.remove();
+    return;
+  }
+
+  cover.classList.remove("hidden");
+
+  btn.addEventListener("click", () => {
+    cover.classList.add("fade-out");
+    setTimeout(() => cover.remove(), 600);
+    localStorage.setItem("wedding_opened", "1");
+  });
 }
 
 // =====================

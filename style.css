@@ -13,6 +13,72 @@
 }
 
 /* =====================
+   Hero Fade-in
+   ===================== */
+.hero-fade {
+  opacity: 0;
+  animation: heroFadeIn 0.5s ease-out forwards;
+  animation-delay: calc(var(--order, 0) * 0.3s);
+}
+
+@keyframes heroFadeIn {
+  to { opacity: 1; }
+}
+
+/* =====================
+   Opening Cover
+   ===================== */
+.opening-cover {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+  transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+}
+
+.opening-cover.fade-out {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.opening-inner {
+  text-align: center;
+  padding: 2rem;
+}
+
+.opening-sub {
+  font-size: 0.82rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  opacity: 0.55;
+  margin-bottom: 0.75rem;
+}
+
+.opening-names {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 8vw, 3.5rem);
+  font-weight: 500;
+  margin-bottom: 0.75rem;
+  color: var(--text);
+}
+
+.opening-date {
+  font-size: 0.85rem;
+  opacity: 0.65;
+  letter-spacing: 0.1em;
+}
+
+.opening-venue {
+  font-size: 0.82rem;
+  opacity: 0.5;
+  margin-top: 0.25rem;
+}
+
+/* =====================
    Section Divider
    ===================== */
 .section-divider {
@@ -153,10 +219,43 @@ textarea, input { font-family: inherit; font-size: inherit; }
 
 .nav-invite-only { display: none; }
 
+@media print {
+  .top-nav,
+  .lang-toggle,
+  .hero-actions,
+  .hero-cta,
+  .event-calendar-links,
+  .map-link,
+  .form,
+  .btn-primary,
+  .stepper,
+  .stepper-btn,
+  .toggle-group,
+  .toggle-btn {
+    display: none !important;
+  }
+  body { background: #fff !important; }
+  .section-hero { background: #fff !important; }
+  .hero-to, .hero-label, .hero-date, .hero-city { color: #222 !important; opacity: 1 !important; }
+  .wish-card { background: #f9f9f9 !important; box-shadow: none !important; border: 1px solid #ddd !important; }
+  .event-card, .map-card { background: #f9f9f9 !important; box-shadow: none !important; border: 1px solid #ddd !important; }
+  .section-divider span { background: #ccc !important; }
+  .section { page-break-inside: avoid; }
+}
+
 @media (min-width: 769px) {
   .top-nav {
     gap: 1.25rem;
     padding: 0.9rem 1.5rem;
+  }
+  body::before {
+    content: "";
+    position: fixed;
+    top: 12px; left: 12px; right: 12px; bottom: 12px;
+    border: 1px solid rgba(44,44,44,0.06);
+    border-radius: 4px;
+    pointer-events: none;
+    z-index: 9999;
   }
 }
 

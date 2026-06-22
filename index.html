@@ -15,6 +15,20 @@
 </head>
 <body>
 
+  <!-- OPENING COVER (Invite mode only) -->
+  <div id="opening-cover" class="opening-cover hidden">
+    <div class="opening-inner">
+      <div class="bismillah" style="font-size:clamp(1.2rem,4vw,1.8rem);margin-bottom:1.5rem">
+        بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+      </div>
+      <p class="opening-sub">The Wedding of</p>
+      <h1 class="opening-names">Eko &amp; Melati</h1>
+      <p class="opening-date">8 Agustus 2026</p>
+      <p class="opening-venue">Masjid Salman ITB</p>
+      <button id="opening-btn" class="hero-cta" style="margin-top:2rem">Buka Undangan</button>
+    </div>
+  </div>
+
   <!-- TOP NAV -->
   <nav class="top-nav" aria-label="Section navigation">
     <a href="#hero" data-i18n="nav.home">Home</a>
@@ -33,28 +47,28 @@
 
   <!-- HERO SECTION -->
   <section id="hero" class="section section-hero">
-    <div class="ornament ornament-top">
+    <div class="ornament ornament-top hero-fade" style="--order:0">
       <img src="assets/ornament-top.svg" alt="" aria-hidden="true" />
     </div>
-    <p id="hero-to" class="hero-to hidden"></p>
-    <div class="bismillah" aria-label="Bismillahirrahmanirrahim">
+    <p id="hero-to" class="hero-to hidden hero-fade" style="--order:0"></p>
+    <div class="bismillah hero-fade" style="--order:0" aria-label="Bismillahirrahmanirrahim">
       بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
     </div>
-    <p class="hero-label">
+    <p class="hero-label hero-fade" style="--order:1">
       <span data-i18n="hero.label.line1"></span>
       <span data-i18n="hero.label.line2"></span>
     </p>
-    <h1 class="hero-names">
+    <h1 class="hero-names hero-fade" style="--order:2">
       <span id="groom-name"></span>
       <span class="hero-ampersand">&amp;</span>
       <span id="bride-name"></span>
     </h1>
-    <p id="hero-date" class="hero-date"></p>
-    <p id="hero-city" class="hero-city"></p>
-    <div class="hero-actions">
+    <p id="hero-date" class="hero-date hero-fade" style="--order:3"></p>
+    <p id="hero-city" class="hero-city hero-fade" style="--order:3"></p>
+    <div class="hero-actions hero-fade" style="--order:4">
       <a href="#couple" class="hero-cta" data-i18n="hero.cta">Buka Undangan</a>
     </div>
-    <div class="ornament ornament-bottom">
+    <div class="ornament ornament-bottom hero-fade" style="--order:4">
       <img src="assets/ornament-bottom.svg" alt="" aria-hidden="true" />
     </div>
   </section>
