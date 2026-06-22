@@ -46,6 +46,7 @@ const I18N = {
     "wishes.loading": "Memuat ucapan...",
     "wishes.empty": "Belum ada ucapan. Jadilah yang pertama!",
     "wishes.success": "Ucapan terkirim. Terima kasih! 🤍",
+    "wishes.justNow": "Baru saja",
     "wishes.error": "Gagal mengirim ucapan. Silakan coba lagi.",
     "closing.text": "Terima kasih telah menjadi bagian dari perjalanan kami. Doa kalian adalah hadiah terbaik."
   },
@@ -94,6 +95,7 @@ const I18N = {
     "wishes.loading": "Loading wishes...",
     "wishes.empty": "No wishes yet. Be the first!",
     "wishes.success": "Wish sent. Thank you! 🤍",
+    "wishes.justNow": "Just now",
     "wishes.error": "Failed to send. Please try again.",
     "closing.text": "Thank you for being part of our journey. Your prayers are the greatest gift."
   }

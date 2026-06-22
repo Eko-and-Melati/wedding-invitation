@@ -414,11 +414,10 @@ function initRSVPForm() {
       }
       localStorage.setItem("rsvp_submitted", "1");
       form.classList.add("hidden");
-      feedback.textContent = attendance === "attending"
+      const msg = attendance === "attending"
         ? I18N[App.lang]["rsvp.success"]
         : I18N[App.lang]["rsvp.successAbsent"];
-      feedback.className = "form-feedback success";
-      feedback.classList.remove("hidden");
+      showToast(msg);
     } catch {
       submitBtn.disabled = false;
       feedback.textContent = I18N[App.lang]["rsvp.error"];
@@ -507,6 +506,19 @@ function initWishForm() {
           body: JSON.stringify(payload)
         });
       }
+      // Prepend wish to list immediately without re-fetch
+      const list = document.getElementById("wishes-list");
+      const emptyEl = list.querySelector(".wishes-empty");
+      if (emptyEl) emptyEl.remove();
+      const card = document.createElement("div");
+      card.className = "wish-card";
+      card.style.animation = "heroFadeIn 0.4s ease-out";
+      card.innerHTML = `
+        <p class="wish-name">${escapeHtml(name)}</p>
+        <p class="wish-message">${escapeHtml(message)}</p>
+        <p class="wish-time">${escapeHtml(I18N[App.lang]["wishes.justNow"] || "Baru saja")}</p>
+      `;
+      list.insertBefore(card, list.firstChild);
       feedback.textContent = I18N[App.lang]["wishes.success"];
       feedback.className = "form-feedback success";
       feedback.classList.remove("hidden");
@@ -660,4 +672,25 @@ function escapeHtml(str) {
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#039;");
+}
+
+// =====================
+// Toast Notification
+// =====================
+function showToast(message) {
+  let toast = document.getElementById("toast");
+  if (!toast) {
+    toast = document.createElement("div");
+    toast.id = "toast";
+    toast.className = "toast-notif";
+    document.body.appendChild(toast);
+  }
+  toast.textContent = message;
+  toast.classList.remove("toast-hide");
+  toast.classList.add("toast-show");
+  clearTimeout(toast._hideTimer);
+  toast._hideTimer = setTimeout(() => {
+    toast.classList.remove("toast-show");
+    toast.classList.add("toast-hide");
+  }, 3500);
 }

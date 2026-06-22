@@ -813,6 +813,29 @@ textarea, input { font-family: inherit; font-size: inherit; }
 .wish-time { font-size: 0.75rem; opacity: 0.45; margin-top: 0.5rem; }
 
 /* =====================
+   Toast Notification
+   ===================== */
+.toast-notif {
+  position: fixed;
+  bottom: 5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 200;
+  background: var(--text);
+  color: var(--bg);
+  padding: 0.85rem 1.8rem;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  text-align: center;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+  max-width: 85vw;
+  pointer-events: none;
+  transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+.toast-show { opacity: 1; visibility: visible; }
+.toast-hide { opacity: 0; visibility: hidden; }
+
+/* =====================
    Closing Section
    ===================== */
 .section-closing { text-align: center; }
