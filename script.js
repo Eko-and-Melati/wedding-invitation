@@ -28,6 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
   loadWishes();
   initLangToggle();
   initScrollSpy();
+  initScrollAnim();
 });
 
 // =====================
@@ -577,6 +578,31 @@ function initScrollSpy() {
   }, { passive: true });
 
   setActive('hero');
+}
+
+// =====================
+// Scroll Animation
+// =====================
+function initScrollAnim() {
+  const sections = document.querySelectorAll("section:not(#hero)");
+  if (!sections.length) return;
+
+  sections.forEach(s => s.classList.add("section-hidden"));
+
+  const obs = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.remove("section-hidden");
+          entry.target.classList.add("section-visible");
+          obs.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+  );
+
+  sections.forEach(s => obs.observe(s));
 }
 
 // =====================

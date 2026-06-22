@@ -56,9 +56,9 @@
    CSS Variables
    ===================== */
 :root {
-  --bg: #FAF7F2;
+  --bg: #FBF8F3;
   --text: #2C2C2C;
-  --accent: #8A9E85;
+  --accent: #7D9478;
   --accent2: #C9A84C;
   --font-heading: 'Cormorant Garamond', Georgia, serif;
   --font-body: 'Inter', system-ui, sans-serif;
@@ -136,6 +136,7 @@ textarea, input { font-family: inherit; font-size: inherit; }
   text-decoration: none;
   color: var(--text);
   opacity: 0.75;
+  transition: opacity 0.2s ease, color 0.2s ease, background 0.2s ease;
 }
 
 .top-nav a:hover { opacity: 1; }
@@ -175,6 +176,21 @@ textarea, input { font-family: inherit; font-size: inherit; }
   padding: var(--section-pad);
   max-width: var(--max-width);
   margin: 0 auto;
+}
+
+.section-hidden {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.section-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section-hidden { opacity: 1; transform: none; transition: none; }
 }
 
 .section-title {
@@ -316,15 +332,16 @@ textarea, input { font-family: inherit; font-size: inherit; }
 .hero-cta {
   display: inline-block;
   padding: 0.75rem 1.2rem;
-  border: 1px solid rgba(44,44,44,0.16);
+  border: 1px solid rgba(44,44,44,0.45);
   border-radius: 999px;
-  background: rgba(255,255,255,0.45);
+  background: rgba(255,255,255,0.4);
   color: var(--text);
-  text-decoration: none;
-  font-size: 0.82rem;
-  letter-spacing: 0.08em;
+  font-size: 0.75rem;
   text-transform: uppercase;
-  box-shadow: 0 8px 24px rgba(44,44,44,0.06);
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
 }
 
 .hero-cta:hover { background: rgba(255,255,255,0.7); }
@@ -430,6 +447,7 @@ textarea, input { font-family: inherit; font-size: inherit; }
   border-radius: 999px;
   padding: 0.5rem 0.75rem;
   font-family: inherit;
+  transition: background 0.2s ease;
 }
 
 .event-calendar-btn:hover { background: rgba(138,158,133,0.14); }
@@ -501,9 +519,9 @@ textarea, input { font-family: inherit; font-size: inherit; }
 
 .countdown-number {
   font-family: var(--font-heading);
-  font-size: 3rem;
+  font-size: clamp(2.5rem, 8vw, 4rem);
   line-height: 1;
-  font-weight: 400;
+  font-weight: 500;
 }
 
 .countdown-label {
@@ -511,7 +529,7 @@ textarea, input { font-family: inherit; font-size: inherit; }
   letter-spacing: 0.12em;
   text-transform: uppercase;
   opacity: 0.6;
-  margin-top: 0.25rem;
+  margin-top: 0.5rem;
 }
 
 .countdown-passed {
@@ -679,19 +697,21 @@ textarea, input { font-family: inherit; font-size: inherit; }
 
 .wish-card {
   padding: 1rem 1.25rem;
-  border-left: 2px solid var(--accent2);
-  background: rgba(201,168,76,0.05);
-  border-radius: 0 6px 6px 0;
+  border: 1px solid rgba(44,44,44,0.08);
+  background: rgba(255,255,255,0.32);
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(44,44,44,0.03);
+  transition: box-shadow var(--transition), background var(--transition);
 }
 
 .wish-name {
-  font-size: 0.85rem;
-  font-weight: 500;
-  margin-bottom: 0.25rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
 }
 
-.wish-message { font-size: 0.9rem; opacity: 0.8; }
-.wish-time { font-size: 0.75rem; opacity: 0.4; margin-top: 0.4rem; }
+.wish-message { font-size: 0.88rem; opacity: 0.8; line-height: 1.55; }
+.wish-time { font-size: 0.75rem; opacity: 0.45; margin-top: 0.5rem; }
 
 /* =====================
    Closing Section
