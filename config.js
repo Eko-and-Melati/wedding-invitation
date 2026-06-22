@@ -42,13 +42,13 @@ const CONFIG = {
     enabled: true,
     deadlineDays: 7,               // RSVP tutup H-7 sebelum acara
     maxPartySize: 10,
-    endpointUrl: "https://script.google.com/macros/s/AKfycbz4v6yJ0r5D9FEjFdeP-8ynEFdCnoFwAoPrShdvBAU2SA3THl-iVw62h5Yp98-7_3LVlg/exec"
+    endpointUrl: "https://script.google.com/macros/s/AKfycby0jVQGTCsiA1-4OnxVOGe3npGnzxuhG1dATdaBsRay2YkzCMM2wY_rRpxZTW43LlqncA/exec"
   },
 
   // Guest wish settings
   guestWish: {
     enabled: true,
-    endpointUrl: "https://script.google.com/macros/s/AKfycbz4v6yJ0r5D9FEjFdeP-8ynEFdCnoFwAoPrShdvBAU2SA3THl-iVw62h5Yp98-7_3LVlg/exec"
+    endpointUrl: "https://script.google.com/macros/s/AKfycby0jVQGTCsiA1-4OnxVOGe3npGnzxuhG1dATdaBsRay2YkzCMM2wY_rRpxZTW43LlqncA/exec"
   },
 
   // Visual theme
