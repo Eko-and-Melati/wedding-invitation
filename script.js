@@ -408,7 +408,7 @@ function initRSVPForm() {
       if (CONFIG.rsvp.endpointUrl) {
         await fetch(CONFIG.rsvp.endpointUrl, {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: { "Content-Type": "text/plain" },
           body: JSON.stringify(payload)
         });
       }
@@ -499,9 +499,11 @@ function initWishForm() {
 
     try {
       if (CONFIG.guestWish.endpointUrl) {
+        // Apps Script redirects POST — use no-cors to skip CORS/redirect issues
+        // Data still saves even if response is unreadable
         await fetch(CONFIG.guestWish.endpointUrl, {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: { "Content-Type": "text/plain" },
           body: JSON.stringify(payload)
         });
       }
