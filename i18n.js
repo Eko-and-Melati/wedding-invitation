@@ -1,9 +1,11 @@
 const I18N = {
   id: {
-    "hero.label.line1": "Bismillah, kami mengundang kehadiran Bapak/Ibu",
-    "hero.label.line2": "pada acara pernikahan kami.",
+    "hero.label.line1": "Kami mengundang kehadiran Bapak/Ibu/Saudara/i",
+    "hero.label.line2": "pada acara akad pernikahan kami.",
+    "hero.invitationText": "Kami mengundang kehadiran Bapak/Ibu/Saudara/i pada acara akad pernikahan kami.",
     "hero.announce.line1": "Bismillah, kabar bahagia pernikahan kami",
     "hero.announce.line2": "kami sampaikan dengan hormat.",
+    "cover.invitationText": "Kami mengundang kehadiran Bapak/Ibu/Saudara/i pada acara akad pernikahan kami.",
     "nav.home": "Home",
     "nav.couple": "Mempelai",
     "nav.events": "Acara",
@@ -53,10 +55,12 @@ const I18N = {
     "closing.parentsLabel": "— Orang Tua Mempelai —"
   },
   en: {
-    "hero.label.line1": "With love, we invite you",
-    "hero.label.line2": "to celebrate our wedding.",
+    "hero.label.line1": "We humbly invite you",
+    "hero.label.line2": "to our wedding ceremony.",
+    "hero.invitationText": "We humbly invite you to our wedding ceremony.",
     "hero.announce.line1": "With joy, we share our wedding announcement",
     "hero.announce.line2": "and warmly invite your blessings.",
+    "cover.invitationText": "We humbly invite you to our wedding ceremony.",
     "hero.cta": "Open Invitation",
     "hero.toPrefix": "Dear:",
     "nav.home": "Home",

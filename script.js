@@ -87,14 +87,13 @@ function renderI18n() {
     if (strings[key] !== undefined) el.textContent = strings[key];
   });
 
-  const heroLine1 = document.querySelector('[data-i18n="hero.label.line1"]');
-  const heroLine2 = document.querySelector('[data-i18n="hero.label.line2"]');
-  if (heroLine1 && heroLine2) {
+  // Hero invitation text — single span with key hero.invitationText
+  const heroInvText = document.querySelector('[data-i18n="hero.invitationText"]');
+  if (heroInvText) {
     const announce = App.mode === "announce";
-    heroLine1.textContent = announce ? strings["hero.announce.line1"] || strings["hero.label.line1"] : strings["hero.label.line1"];
-    heroLine2.textContent = announce ? strings["hero.announce.line2"] || strings["hero.label.line2"] : strings["hero.label.line2"];
-    heroLine1.classList.add('hero-label-line');
-    heroLine2.classList.add('hero-label-line');
+    heroInvText.textContent = announce
+      ? ((strings["hero.announce.line1"] || "") + " " + (strings["hero.announce.line2"] || "")).trim()
+      : strings["hero.invitationText"] || "";
   }
 
   document.getElementById("lang-label").textContent =
@@ -117,8 +116,8 @@ function renderConfig() {
   document.getElementById("bride-name").textContent = couple.bride.name;
   document.getElementById("groom-fullname").textContent = couple.groom.fullName;
   document.getElementById("bride-fullname").textContent = couple.bride.fullName;
-  document.getElementById("groom-parents").textContent = couple.groom.parents;
-  document.getElementById("bride-parents").textContent = couple.bride.parents;
+  document.getElementById("groom-parents").textContent = couple.groom.parentsFull || couple.groom.parents;
+  document.getElementById("bride-parents").textContent = couple.bride.parentsFull || couple.bride.parents;
   document.getElementById("closing-groom").textContent = couple.groom.name;
   document.getElementById("closing-bride").textContent = couple.bride.name;
   document.getElementById("closing-parents-text").innerHTML =
@@ -312,6 +311,13 @@ function initLangToggle() {
     renderMaps();
     renderHero();
   });
+}
+
+// =====================
+// Render Hero (called on lang switch)
+// =====================
+function renderHero() {
+  // renderI18n + renderConfig already update hero; nothing extra needed.
 }
 
 // =====================
