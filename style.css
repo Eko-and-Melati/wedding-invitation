@@ -12,6 +12,15 @@
   direction: rtl;
 }
 
+.hero-assalamu {
+  font-family: 'Scheherazade New', 'Amiri', serif;
+  font-size: clamp(1rem, 3.5vw, 1.4rem);
+  margin-bottom: 0.5rem;
+  opacity: 0.72;
+  line-height: 1.6;
+  direction: rtl;
+}
+
 /* =====================
    Hero Fade-in
    ===================== */
