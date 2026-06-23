@@ -12,7 +12,7 @@ const I18N = {
     "nav.rsvp": "RSVP",
     "nav.wishes": "Ucapan",
     "hero.cta": "Buka Undangan",
-    "hero.toPrefix": "Kepada:",
+    "hero.toPrefix": "Kepada Yth.",
     "couple.title": "Mempelai",
     "events.title": "Detail Acara",
     "events.addCalendar": "Tambah ke Kalender",
@@ -48,7 +48,9 @@ const I18N = {
     "wishes.success": "Ucapan terkirim. Terima kasih! 🤍",
     "wishes.justNow": "Baru saja",
     "wishes.error": "Gagal mengirim ucapan. Silakan coba lagi.",
-    "closing.text": "Terima kasih telah menjadi bagian dari perjalanan kami. Doa kalian adalah hadiah terbaik."
+    "closing.text": "Merupakan suatu kehormatan dan kebahagiaan apabila Bapak/Ibu berkenan memberikan doa restu.",
+    "closing.hormat": "Hormat kami,",
+    "closing.parentsLabel": "— Orang Tua Mempelai —"
   },
   en: {
     "hero.label.line1": "With love, we invite you",
@@ -97,6 +99,8 @@ const I18N = {
     "wishes.success": "Wish sent. Thank you! 🤍",
     "wishes.justNow": "Just now",
     "wishes.error": "Failed to send. Please try again.",
-    "closing.text": "Thank you for being part of our journey. Your prayers are the greatest gift."
+    "closing.text": "It is an honor and joy if you would kindly grant your prayers and blessings.",
+    "closing.hormat": "Respectfully,",
+    "closing.parentsLabel": "— Parents of the Bride & Groom —"
   }
 };

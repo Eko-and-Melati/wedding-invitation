@@ -121,6 +121,8 @@ function renderConfig() {
   document.getElementById("bride-parents").textContent = couple.bride.parents;
   document.getElementById("closing-groom").textContent = couple.groom.name;
   document.getElementById("closing-bride").textContent = couple.bride.name;
+  document.getElementById("closing-parents-text").innerHTML =
+    `${escapeHtml(couple.groom.parents)}<br>${escapeHtml(couple.bride.parents)}`;
 
   // Hero date & city
   if (target) {
@@ -638,6 +640,21 @@ function initOpeningCover() {
   if (localStorage.getItem("wedding_opened")) {
     cover.remove();
     return;
+  }
+
+  // Show guest name on cover
+  const openingTo = document.getElementById("opening-to");
+  if (openingTo && App.guestName) {
+    const namePart = App.guestTitle
+      ? `${App.guestTitle} ${App.guestName}`.trim()
+      : App.guestName;
+    const suffixPart = App.guestSuffix || "";
+    const prefix = I18N[App.lang]["hero.toPrefix"] || "Kepada Yth.";
+    const str = suffixPart
+      ? `${escapeHtml(prefix)} <span class="opening-to-name">${escapeHtml(namePart)}</span> <span class="hero-to-suffix">${escapeHtml(suffixPart)}</span>`
+      : `${escapeHtml(prefix)} <span class="opening-to-name">${escapeHtml(namePart)}</span>`;
+    openingTo.innerHTML = str;
+    openingTo.classList.remove("hidden");
   }
 
   cover.classList.remove("hidden");

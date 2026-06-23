@@ -78,6 +78,20 @@
   margin-top: 0.25rem;
 }
 
+.opening-to {
+  font-size: 0.88rem;
+  letter-spacing: 0.06em;
+  opacity: 0;
+  animation: heroFadeIn 0.5s ease-out 0.3s forwards;
+  margin-bottom: 0.75rem;
+  line-height: 1.6;
+}
+
+.opening-to-name {
+  font-weight: 600;
+  color: var(--text);
+}
+
 /* =====================
    Section Divider
    ===================== */
@@ -853,6 +867,28 @@ textarea, input { font-family: inherit; font-size: inherit; }
   font-size: 1.5rem;
   font-weight: 400;
   font-style: italic;
+}
+
+.closing-hormat {
+  font-size: 0.85rem;
+  opacity: 0.6;
+  font-style: italic;
+  margin-bottom: 0.5rem;
+}
+
+.closing-parents-label {
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.4;
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.closing-parents {
+  font-size: 0.88rem;
+  opacity: 0.65;
+  line-height: 1.7;
 }
 
 .closing-footer {
