@@ -477,6 +477,12 @@ textarea, input { font-family: inherit; font-size: inherit; }
   margin-bottom: 0.4rem;
 }
 
+.couple-prefix {
+  font-size: 0.85rem;
+  opacity: 0.6;
+  margin-bottom: 0.25rem;
+}
+
 .couple-parents {
   font-size: 0.85rem;
   opacity: 0.65;

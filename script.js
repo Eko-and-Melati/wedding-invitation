@@ -116,8 +116,10 @@ function renderConfig() {
   document.getElementById("bride-name").textContent = couple.bride.name;
   document.getElementById("groom-fullname").textContent = couple.groom.fullName;
   document.getElementById("bride-fullname").textContent = couple.bride.fullName;
-  document.getElementById("groom-parents").textContent = couple.groom.parentsFull || couple.groom.parents;
-  document.getElementById("bride-parents").textContent = couple.bride.parentsFull || couple.bride.parents;
+  document.getElementById("groom-prefix").textContent = couple.groom.parentsPrefix || "";
+  document.getElementById("bride-prefix").textContent = couple.bride.parentsPrefix || "";
+  document.getElementById("groom-parents").textContent = couple.groom.parents;
+  document.getElementById("bride-parents").textContent = couple.bride.parents;
   document.getElementById("closing-groom").textContent = couple.groom.name;
   document.getElementById("closing-bride").textContent = couple.bride.name;
   document.getElementById("closing-parents-text").innerHTML =

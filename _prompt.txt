@@ -1,0 +1,20 @@
+Fix couple section to 3-line layout per card.
+
+Groom card (id="groom-card"):
+  Line 1: Eko Rudiawan Jamzuri (existing #groom-fullname)
+  Line 2: Putra dari (NEW - separate line)
+  Line 3: Alm. Bapak Ruwadi & Ibu Miarsih (existing #groom-parents, remove "Putra dari" prefix from parentsFull in JS)
+
+Bride card (id="bride-card"):
+  Line 1: Melati Budiana Putri (existing #bride-fullname)
+  Line 2: Putri dari (NEW - separate line)
+  Line 3: Bapak Supomo & Ibu Rini Lestari (existing #bride-parents)
+
+Files to edit:
+1. config.js - add parentsPrefix field: groom.parentsPrefix="Putra dari", bride.parentsPrefix="Putri dari"
+2. index.html - add <p class="couple-prefix" id="groom-prefix"></p> and <p class="couple-prefix" id="bride-prefix"></p> between fullname and parents elements in couple section
+3. script.js - in renderConfig(), set groom-prefix and bride-prefix textContent from config. Change groom-parents and bride-parents to show only the parent names (not including "Putra dari" prefix)
+4. style.css - add .couple-prefix styling (font-size: 0.85rem, opacity: 0.6, margin-bottom: 0.25rem)
+
+Full project at /home/ekorudiawan/development/wedding-invitation-app.
+Read files first, then edit.

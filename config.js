@@ -10,12 +10,14 @@ const CONFIG = {
     groom: {
       name: "Eko",
       fullName: "Eko Rudiawan Jamzuri",
+      parentsPrefix: "Putra dari",
       parents: "Alm. Bapak Ruwadi & Ibu Miarsih",
       parentsFull: "Putra dari Alm. Bapak Ruwadi & Ibu Miarsih"
     },
     bride: {
       name: "Melati",
       fullName: "Melati Budiana Putri",
+      parentsPrefix: "Putri dari",
       parents: "Bapak Supomo & Ibu Rini Lestari",
       parentsFull: "Putri dari Bapak Supomo & Ibu Rini Lestari"
     }
