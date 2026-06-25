@@ -43,9 +43,16 @@ function initMode() {
 
   if (to && to.trim() !== "") {
     App.mode = "invite";
-    App.guestName = decodeURIComponent(to.trim());
-    App.guestTitle = title && title.trim() !== "" ? decodeURIComponent(title.trim()) : "";
-    App.guestSuffix = suffix && suffix.trim() !== "" ? decodeURIComponent(suffix.trim()) : "";
+    try { App.guestName = decodeURIComponent(to.trim()); }
+    catch { App.guestName = to.trim(); }
+    if (title && title.trim() !== "") {
+      try { App.guestTitle = decodeURIComponent(title.trim()); }
+      catch { App.guestTitle = title.trim(); }
+    }
+    if (suffix && suffix.trim() !== "") {
+      try { App.guestSuffix = decodeURIComponent(suffix.trim()); }
+      catch { App.guestSuffix = suffix.trim(); }
+    }
   } else {
     App.mode = "announce";
   }
@@ -332,12 +339,13 @@ function initRSVPForm() {
   const closedEl = document.getElementById("rsvp-closed");
   const feedback = document.getElementById("rsvp-feedback");
 
-  // Already submitted?
-  if (localStorage.getItem("rsvp_submitted")) {
-    form.classList.add("hidden");
-    closedEl.classList.remove("hidden");
-    closedEl.querySelector("p").textContent = I18N[App.lang]["rsvp.already"];
-    return;
+  // Prefill name from URL, disable editing
+  const nameInput = document.getElementById("rsvp-name");
+  if (nameInput && App.guestName) {
+    nameInput.value = App.guestTitle
+      ? `${App.guestTitle} ${App.guestName}`.trim()
+      : App.guestName;
+    nameInput.readOnly = true;
   }
 
   // Deadline check
@@ -432,7 +440,6 @@ function initRSVPForm() {
           body: JSON.stringify(payload)
         });
       }
-      localStorage.setItem("rsvp_submitted", "1");
       form.classList.add("hidden");
       const msg = attendance === "attending"
         ? I18N[App.lang]["rsvp.success"]
@@ -462,29 +469,39 @@ async function loadWishes() {
     return;
   }
 
-  try {
-    const res = await fetch(`${CONFIG.guestWish.endpointUrl}?type=wishes`);
-    const data = await res.json();
-    if (loadingEl) loadingEl.remove();
+  // Retry logic: up to 3 attempts with backoff
+  let lastError;
+  for (let attempt = 1; attempt <= 3; attempt++) {
+    try {
+      const res = await fetch(`${CONFIG.guestWish.endpointUrl}?type=wishes`);
+      const data = await res.json();
+      if (loadingEl) loadingEl.remove();
 
-    if (!data.wishes || data.wishes.length === 0) {
-      container.innerHTML = `<p style="opacity:0.5;font-size:0.9rem">${I18N[App.lang]["wishes.empty"]}</p>`;
-      return;
+      if (!data.wishes || data.wishes.length === 0) {
+        container.innerHTML = `<p style="opacity:0.5;font-size:0.9rem">${I18N[App.lang]["wishes.empty"]}</p>`;
+        return;
+      }
+
+      data.wishes.forEach(w => {
+        const card = document.createElement("div");
+        card.className = "wish-card";
+        card.innerHTML = `
+          <p class="wish-name">${escapeHtml(w.guest_name || "")}</p>
+          <p class="wish-message">${escapeHtml(w.message || "")}</p>
+          <p class="wish-time">${escapeHtml(w.timestamp || "")}</p>
+        `;
+        container.appendChild(card);
+      });
+      return; // success
+    } catch (err) {
+      lastError = err;
+      if (attempt < 3) await new Promise(r => setTimeout(r, attempt * 1000));
     }
-
-    data.wishes.forEach(w => {
-      const card = document.createElement("div");
-      card.className = "wish-card";
-      card.innerHTML = `
-        <p class="wish-name">${escapeHtml(w.guest_name || "")}</p>
-        <p class="wish-message">${escapeHtml(w.message || "")}</p>
-        <p class="wish-time">${escapeHtml(w.timestamp || "")}</p>
-      `;
-      container.appendChild(card);
-    });
-  } catch {
-    if (loadingEl) loadingEl.remove();
   }
+
+  // All attempts failed
+  if (loadingEl) loadingEl.remove();
+  container.innerHTML = `<p style="opacity:0.4;font-size:0.85rem">${I18N[App.lang]["wishes.error"] || "Gagal memuat"}</p>`;
 }
 
 // =====================
@@ -492,6 +509,15 @@ async function loadWishes() {
 // =====================
 function initWishForm() {
   if (!CONFIG.guestWish.enabled) return;
+
+  // Prefill name from URL, disable editing
+  const wishName = document.getElementById("wish-name");
+  if (wishName && App.guestName) {
+    wishName.value = App.guestTitle
+      ? `${App.guestTitle} ${App.guestName}`.trim()
+      : App.guestName;
+    wishName.readOnly = true;
+  }
 
   const form     = document.getElementById("wish-form");
   const feedback = document.getElementById("wish-feedback");
@@ -695,7 +721,11 @@ function initOpeningCover() {
 
   btn.addEventListener("click", () => {
     cover.classList.add("fade-out");
-    setTimeout(() => cover.remove(), 600);
+    // Reveal hero content after cover starts fading
+    setTimeout(() => {
+      cover.remove();
+      document.querySelectorAll(".hero-fade").forEach(el => el.classList.add("hero-reveal"));
+    }, 500);
     localStorage.setItem("wedding_opened", "1");
   });
 }

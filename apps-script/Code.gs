@@ -37,6 +37,25 @@ function doPost(e) {
 
 function saveRSVP(data) {
   const sheet = getOrCreateSheet(RSVP_SHEET, RSVP_HEADERS);
+  const rows  = sheet.getDataRange().getValues();
+  const name  = (data.guest_name || "").trim().toLowerCase();
+
+  // Check if guest already RSVP'd — update existing row
+  for (let i = 1; i < rows.length; i++) {
+    if ((rows[i][1] || "").trim().toLowerCase() === name) {
+      const rowNum = i + 1; // 1-indexed for Sheets
+      sheet.getRange(rowNum, 1).setValue(new Date().toISOString());          // timestamp
+      sheet.getRange(rowNum, 3).setValue(data.attendance_status || "");     // attendance
+      sheet.getRange(rowNum, 4).setValue(data.party_size || 0);             // party size
+      sheet.getRange(rowNum, 5).setValue(data.note || "");                  // note
+      sheet.getRange(rowNum, 6).setValue(data.source_url || "");            // source_url
+      sheet.getRange(rowNum, 7).setValue(data.language || "");              // language
+      sheet.getRange(rowNum, 8).setValue(data.mode || "");                  // mode
+      return jsonResponse({ success: true, updated: true });
+    }
+  }
+
+  // New entry
   sheet.appendRow([
     new Date().toISOString(),
     data.guest_name        || "",
@@ -47,7 +66,7 @@ function saveRSVP(data) {
     data.language          || "",
     data.mode              || ""
   ]);
-  return jsonResponse({ success: true });
+  return jsonResponse({ success: true, updated: false });
 }
 
 function saveWish(data) {

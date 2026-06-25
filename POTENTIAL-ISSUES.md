@@ -27,7 +27,7 @@ try {
 
 ---
 
-### 3. `decodeURIComponent` crash kalau URL rusak
+### 3. `decodeURIComponent` crash kalau URL rusak **[✓ FIXED]**
 ```js
 App.guestName = decodeURIComponent(to.trim());
 ```
@@ -54,7 +54,7 @@ RSVP form submit → POST ke Apps Script. Apps Script return 302 redirect (balik
 
 ---
 
-### 5. RSVP duplikat — localStorage bisa dihapus
+### 5. RSVP duplikat — localStorage bisa dihapus **[✓ FIXED]**
 Dedup cuma pake `localStorage.getItem("rsvp_submitted")`. Guest ganti HP, clear cookie, buka private mode, atau hapus data situs → bisa RSVP lagi. Sheet kena duplikat.
 
 **Fix:** Server-side dedup via Google Sheets `QUERY` atau check existing guest_name. Atau ack di PRD sebagai known limitation.
@@ -68,7 +68,7 @@ PRD §6.4 RSVP deadline H-7 sudah diimplement (form closed otomatis). Tapi guest
 
 ---
 
-### 7. Edit RSVP — tidak ada mekanisme perubahan
+### 7. Edit RSVP — tidak ada mekanisme perubahan **[✓ FIXED]**
 Setelah submit RSVP, guest tidak bisa edit. Kalau tadinya "Hadir" berubah jadi "Tidak Hadir" (atau sebaliknya), tidak ada cara update.
 
 **Fix:** Izinkan re-submit kalau masih sebelum deadline. Timpa data lama berdasarkan `guest_name` + `source_url`. Atau kirim payload `update_existing: true`.
@@ -88,14 +88,14 @@ Setelah submit RSVP, form disembunyikan, toast muncul sebentar lalu hilang. Gues
 
 ## 🟢 Minor
 
-### 9. Font loading lambat di koneksi lambat
+### 9. Font loading lambat di koneksi lambat **[✓ FIXED]**
 5+ file font (Cormorant 4 weight, Inter 3 weight, Scheherazade 2 weight). Page render delay sampai font selesai download.
 
 **Fix:** Font subsetting, kurangi weight, atau gunakan `font-display: swap`.
 
 ---
 
-### 10. Tidak ada `font-display: swap`
+### 10. Tidak ada `font-display: swap` **[✓ FIXED]**
 Google Fonts link default `display=block` → browser sembunyikan text sampai font selesai load (FOIT). Di koneksi lambat text invisible beberapa detik.
 
 **Fix:** Tambah `&display=swap` di Google Fonts URL (jika belum ada).
@@ -109,21 +109,21 @@ Guest tidak ada cara mudah buat copy link undangan dari page.
 
 ---
 
-### 12. Cover fade-out transisi kurang smooth
+### 12. Cover fade-out transisi kurang smooth **[✓ FIXED]**
 Cover `fade-out` 600ms, terus `remove()`. Hero di belakang cover muncul mentah. Transisi terasa janggal.
 
 **Fix:** Tambah delay kecil + hero fade-in setelah cover hilang.
 
 ---
 
-### 13. Guest bisa isi nama sembarang di RSVP/wish
+### 13. Guest bisa isi nama sembarang di RSVP/wish **[✓ FIXED]**
 Field name free text. Guest bisa isi nama orang lain atau nickname aneh. Tidak ada validasi.
 
 **Fix:** Minimal disabled field (pake nama dari `?to=`), atau validasi server-side.
 
 ---
 
-### 14. Wishes loading lama — no retry
+### 14. Wishes loading lama — no retry **[✓ FIXED]**
 Kalau Apps Script cold start (1-2 detik), wishes muncul telat. Kalau error, loading text hilang diam-diam tanpa notif.
 
 **Fix:** Tambah timeout/retry, atau cache wishes terakhir di localStorage.
