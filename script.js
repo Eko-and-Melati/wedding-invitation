@@ -719,3 +719,16 @@ function showToast(message) {
     toast.classList.add("toast-hide");
   }, 3500);
 }
+
+// =====================
+// WhatsApp Share
+// =====================
+function shareToWA() {
+  const url = window.location.href;
+  const guest = App.guestName;
+  const text = guest
+    ? `Assalamu'alaikum,\n\nYth. ${App.guestTitle || ""} ${guest}\n\nKami mengundang Bapak/Ibu/Saudara untuk menghadiri acara pernikahan kami. Klik link berikut untuk detail:\n${url}\n\n— Eko & Melati`
+    : `Assalamu'alaikum,\n\nKami mengundang Anda untuk menghadiri acara pernikahan kami.\n\n${url}\n\n— Eko & Melati`;
+  const waUrl = `https://wa.me/?text=${encodeURIComponent(text)}`;
+  window.open(waUrl, "_blank");
+}

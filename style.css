@@ -844,6 +844,30 @@ textarea, input { font-family: inherit; font-size: inherit; }
 }
 .toast-show { opacity: 1; visibility: visible; }
 .toast-hide { opacity: 0; visibility: hidden; }
+/* =====================
+   Floating Share Button
+   ===================== */
+.btn-share-wa {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 150;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: none;
+  background: #25D366;
+  color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(37, 211, 102, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.btn-share-wa:hover { transform: scale(1.08); box-shadow: 0 6px 24px rgba(37, 211, 102, 0.45); }
+.btn-share-wa svg { width: 26px; height: 26px; fill: currentColor; }
 
 /* =====================
    Closing Section
