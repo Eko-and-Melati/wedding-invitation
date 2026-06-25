@@ -614,20 +614,36 @@ function initScrollAnim() {
 
   sections.forEach(s => s.classList.add("section-hidden"));
 
-  const obs = new IntersectionObserver(
-    (entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.remove("section-hidden");
-          entry.target.classList.add("section-visible");
-          obs.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
-  );
+  // Fallback for browsers without IntersectionObserver support
+  if (!("IntersectionObserver" in window)) {
+    sections.forEach(s => {
+      s.classList.remove("section-hidden");
+      s.classList.add("section-visible");
+    });
+    return;
+  }
 
-  sections.forEach(s => obs.observe(s));
+  try {
+    const obs = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.remove("section-hidden");
+            entry.target.classList.add("section-visible");
+            obs.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+    );
+    sections.forEach(s => obs.observe(s));
+  } catch {
+    // Fallback: show all sections if IntersectionObserver fails
+    sections.forEach(s => {
+      s.classList.remove("section-hidden");
+      s.classList.add("section-visible");
+    });
+  }
 }
 
 // =====================

@@ -17,7 +17,7 @@ Tidak ada `<meta property="og:image">`. Guest share link via WhatsApp atau Teleg
 
 ---
 
-### 2. IntersectionObserver — Halaman kosong di browser tua
+### 2. IntersectionObserver — Halaman kosong di browser tua **[✓ FIXED]**
 `IntersectionObserver` dipakai buat fade-in section. Browser tua (Android WebView 4.x, IE11, UC Browser lawas) tidak support → `new IntersectionObserver()` throw error → semua section tetap `opacity: 0` → invisible.
 
 **Fix:** Wrapper try-catch + fallback langsung visible:
@@ -106,7 +106,7 @@ Google Fonts link default `display=block` → browser sembunyikan text sampai fo
 
 ---
 
-### 11. Tidak ada share button
+### 11. Tidak ada share button **[✓ FIXED]**
 Guest tidak ada cara mudah buat copy link undangan dari page.
 
 **Fix:** Floating share button → copy link ke clipboard + native share API.
