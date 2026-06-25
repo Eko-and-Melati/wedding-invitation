@@ -8,7 +8,7 @@
 // 4. Isi SHEET_ID di bawah dengan ID dari URL sheet kamu
 // 5. Deploy → New Deployment → Web App → Execute as: Me → Anyone
 
-const SHEET_ID   = "YOUR_GOOGLE_SHEET_ID"; // Ganti dengan Sheet ID kamu
+const SHEET_ID = "1-ksha8Y-DCOilyJ5DiI9d8wr24vdOYtAUlVAWvucVqg";// Ganti dengan Sheet ID kamu
 const RSVP_SHEET = "RSVP";
 const WISH_SHEET = "Wishes";
 
