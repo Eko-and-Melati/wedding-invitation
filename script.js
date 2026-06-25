@@ -712,12 +712,14 @@ function initOpeningCover() {
   // Skip opening cover in announce mode
   if (App.mode !== "invite") {
     cover.remove();
+    document.querySelectorAll(".hero-fade").forEach(el => el.classList.add("hero-reveal"));
     return;
   }
 
   // Skip if already opened before
   if (localStorage.getItem("wedding_opened")) {
     cover.remove();
+    document.querySelectorAll(".hero-fade").forEach(el => el.classList.add("hero-reveal"));
     return;
   }
 
