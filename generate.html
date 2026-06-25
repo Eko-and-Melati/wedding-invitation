@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Buat Link Undangan — Eko & Melati</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #faf7f2;
+      color: #2c2c2c;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 1.5rem;
+    }
+    .card {
+      background: #fff;
+      max-width: 480px;
+      width: 100%;
+      border-radius: 20px;
+      padding: 2rem 1.75rem;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.06);
+      text-align: center;
+    }
+    .card h1 {
+      font-family: "Georgia", serif;
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: #1a1a1a;
+      margin-bottom: 0.25rem;
+    }
+    .card .sub {
+      font-size: 0.85rem;
+      color: #888;
+      margin-bottom: 1.75rem;
+    }
+    .card label {
+      display: block;
+      text-align: left;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #555;
+      margin-bottom: 0.3rem;
+    }
+    .card input,
+    .card select {
+      width: 100%;
+      padding: 0.7rem 0.9rem;
+      font-size: 1rem;
+      border: 1.5px solid #e0ddd8;
+      border-radius: 10px;
+      background: #fafaf8;
+      outline: none;
+      transition: border-color 0.2s;
+      margin-bottom: 1rem;
+    }
+    .card input:focus,
+    .card select:focus {
+      border-color: #c4a882;
+      background: #fff;
+    }
+    .url-box {
+      background: #f5f2ec;
+      border-radius: 10px;
+      padding: 0.8rem 1rem;
+      font-size: 0.8rem;
+      word-break: break-all;
+      text-align: left;
+      color: #555;
+      margin: 1rem 0 1.25rem;
+      border: 1px dashed #d5d0c8;
+      min-height: 2.8rem;
+    }
+    .btn-row {
+      display: flex;
+      gap: 0.6rem;
+    }
+    .btn-row button {
+      flex: 1;
+      padding: 0.75rem 0;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .btn-row button:active { transform: scale(0.97); }
+    .btn-copy {
+      background: #e8e4dc;
+      color: #333;
+    }
+    .btn-copy:hover { background: #ddd8ce; }
+    .btn-copy.copied {
+      background: #4caf50;
+      color: #fff;
+    }
+    .btn-wa {
+      background: #25D366;
+      color: #fff;
+    }
+    .btn-wa:hover { box-shadow: 0 2px 12px rgba(37,211,102,0.4); }
+    .saved-list {
+      margin-top: 1.75rem;
+      text-align: left;
+      border-top: 1px solid #eee;
+      padding-top: 1.25rem;
+    }
+    .saved-list h3 {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #666;
+      margin-bottom: 0.75rem;
+    }
+    .saved-list .item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #f0eee8;
+      font-size: 0.85rem;
+    }
+    .saved-list .item .name { font-weight: 500; }
+    .saved-list .item .actions {
+      display: flex;
+      gap: 0.4rem;
+    }
+    .saved-list .item .actions button {
+      background: none;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      padding: 0.25rem 0.5rem;
+      font-size: 0.75rem;
+      cursor: pointer;
+      color: #666;
+    }
+    .saved-list .item .actions button:hover {
+      background: #f5f2ec;
+    }
+    .saved-list .clear-btn {
+      display: block;
+      width: 100%;
+      margin-top: 0.75rem;
+      padding: 0.5rem;
+      background: none;
+      border: 1px solid #e0ddd8;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      color: #999;
+      cursor: pointer;
+    }
+    .saved-list .clear-btn:hover { color: #e74c3c; border-color: #e74c3c; }
+    .toast-gen {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #333;
+      color: #fff;
+      padding: 0.6rem 1.2rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      opacity: 0;
+      transition: opacity 0.3s;
+      pointer-events: none;
+    }
+    .toast-gen.show { opacity: 1; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Buat Link Undangan</h1>
+    <p class="sub">Eko &amp; Melati • 8 Agustus 2026</p>
+
+    <label for="title">Gelar</label>
+    <select id="title">
+      <option value="Bapak">Bapak</option>
+      <option value="Ibu">Ibu</option>
+      <option value="Bapak/Ibu">Bapak/Ibu</option>
+      <option value="Saudara">Saudara</option>
+      <option value="Saudari">Saudari</option>
+      <option value="">(tanpa gelar)</option>
+    </select>
+
+    <label for="name">Nama Tamu</label>
+    <input type="text" id="name" placeholder="Masukkan nama tamu..." autocomplete="off" />
+
+    <div class="url-box" id="urlDisplay">Isi nama tamu untuk membuat link</div>
+
+    <div class="btn-row">
+      <button class="btn-copy" id="btnCopy" onclick="copyLink()">📋 Salin Link</button>
+      <button class="btn-wa" id="btnWA" onclick="shareWA()">⬇ Bagikan WA</button>
+    </div>
+
+    <div class="saved-list" id="savedSection" style="display:none">
+      <h3>🕓 Riwayat</h3>
+      <div id="savedList"></div>
+      <button class="clear-btn" onclick="clearAll()">Hapus semua riwayat</button>
+    </div>
+  </div>
+
+  <div class="toast-gen" id="toastGen"></div>
+
+  <script>
+    const BASE = "https://eko-and-melati.github.io/wedding-invitation/";
+
+    const titleEl = document.getElementById("title");
+    const nameEl = document.getElementById("name");
+    const urlDisplay = document.getElementById("urlDisplay");
+    const btnCopy = document.getElementById("btnCopy");
+    const btnWA = document.getElementById("btnWA");
+    const savedSection = document.getElementById("savedSection");
+    const savedList = document.getElementById("savedList");
+    const toast = document.getElementById("toastGen");
+
+    function showToast(msg) {
+      toast.textContent = msg;
+      toast.classList.add("show");
+      clearTimeout(toast._t);
+      toast._t = setTimeout(() => toast.classList.remove("show"), 2500);
+    }
+
+    function buildURL() {
+      const title = titleEl.value.trim();
+      const name = nameEl.value.trim();
+      if (!name) {
+        urlDisplay.textContent = "Isi nama tamu untuk membuat link";
+        btnCopy.disabled = true;
+        btnWA.disabled = true;
+        btnCopy.style.opacity = "0.5";
+        btnWA.style.opacity = "0.5";
+        return "";
+      }
+      btnCopy.disabled = false;
+      btnWA.disabled = false;
+      btnCopy.style.opacity = "1";
+      btnWA.style.opacity = "1";
+
+      let url = BASE;
+      const params = [];
+      const nameEnc = encodeURIComponent(name);
+      params.push("to=" + nameEnc);
+      if (title) params.push("title=" + encodeURIComponent(title));
+      url += "?" + params.join("&");
+      urlDisplay.textContent = url;
+      return url;
+    }
+
+    titleEl.addEventListener("change", () => { buildURL(); });
+    nameEl.addEventListener("input", () => { buildURL(); });
+
+    function copyLink() {
+      const url = buildURL();
+      if (!url) return;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(url).then(() => {
+          btnCopy.textContent = "✅ Tersalin!";
+          btnCopy.classList.add("copied");
+          showToast("Link tersalin! ✓");
+          saveToHistory(titleEl.value.trim(), nameEl.value.trim(), url);
+          setTimeout(() => {
+            btnCopy.textContent = "📋 Salin Link";
+            btnCopy.classList.remove("copied");
+          }, 2000);
+        }).catch(() => fallbackCopy(url));
+      } else {
+        fallbackCopy(url);
+      }
+    }
+
+    function fallbackCopy(url) {
+      urlDisplay.textContent = url;
+      const range = document.createRange();
+      range.selectNodeContents(urlDisplay);
+      const sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+      document.execCommand("copy");
+      sel.removeAllRanges();
+      btnCopy.textContent = "✅ Tersalin!";
+      btnCopy.classList.add("copied");
+      showToast("Link tersalin! ✓");
+      saveToHistory(titleEl.value.trim(), nameEl.value.trim(), url);
+      setTimeout(() => {
+        btnCopy.textContent = "📋 Salin Link";
+        btnCopy.classList.remove("copied");
+      }, 2000);
+    }
+
+    function shareWA() {
+      const url = buildURL();
+      if (!url) return;
+      const title = titleEl.value.trim();
+      const name = nameEl.value.trim();
+      const text = title
+        ? `Assalamu'alaikum,\n\nYth. ${title} ${name}\n\nKami mengundang ${title} ${name} untuk menghadiri acara pernikahan kami. Klik link berikut:\n${url}\n\n— Eko & Melati`
+        : `Assalamu'alaikum,\n\nKami mengundang ${name} untuk menghadiri acara pernikahan kami. Klik link berikut:\n${url}\n\n— Eko & Melati`;
+      const waUrl = `https://wa.me/?text=${encodeURIComponent(text)}`;
+      saveToHistory(title, name, url);
+      window.open(waUrl, "_blank");
+    }
+
+    function saveToHistory(title, name, url) {
+      let history = JSON.parse(localStorage.getItem("gen_history") || "[]");
+      const entry = { title, name, url, time: new Date().toISOString() };
+      history = [entry, ...history.filter(h => h.name !== name || h.title !== title)].slice(0, 50);
+      localStorage.setItem("gen_history", JSON.stringify(history));
+      renderHistory();
+    }
+
+    function renderHistory() {
+      const history = JSON.parse(localStorage.getItem("gen_history") || "[]");
+      if (history.length === 0) {
+        savedSection.style.display = "none";
+        return;
+      }
+      savedSection.style.display = "block";
+      savedList.innerHTML = history.map((h, i) => {
+        const label = h.title ? h.title + " " + h.name : h.name;
+        return `<div class="item">
+          <span class="name">${escHtml(label)}</span>
+          <span class="actions">
+            <button onclick="waFromHistory(${i})" title="Share WA">⬇</button>
+            <button onclick="copyFromHistory(${i})" title="Salin link">📋</button>
+            <button onclick="deleteFromHistory(${i})" title="Hapus">✕</button>
+          </span>
+        </div>`;
+      }).join("");
+    }
+
+    function escHtml(s) {
+      const d = document.createElement("div");
+      d.textContent = s;
+      return d.innerHTML;
+    }
+
+    function waFromHistory(i) {
+      const h = JSON.parse(localStorage.getItem("gen_history") || "[]")[i];
+      if (!h) return;
+      const text = h.title
+        ? `Assalamu'alaikum,\n\nYth. ${h.title} ${h.name}\n\nKami mengundang ${h.title} ${h.name} untuk menghadiri acara pernikahan kami. Klik link berikut:\n${h.url}\n\n— Eko & Melati`
+        : `Assalamu'alaikum,\n\nKami mengundang ${h.name} untuk menghadiri acara pernikahan kami. Klik link berikut:\n${h.url}\n\n— Eko & Melati`;
+      window.open("https://wa.me/?text=" + encodeURIComponent(text), "_blank");
+    }
+
+    function copyFromHistory(i) {
+      const h = JSON.parse(localStorage.getItem("gen_history") || "[]")[i];
+      if (!h) return;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(h.url).then(() => showToast("Link tersalin! ✓"));
+      } else {
+        urlDisplay.textContent = h.url;
+        const range = document.createRange();
+        range.selectNodeContents(urlDisplay);
+        const sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+        document.execCommand("copy");
+        showToast("Link tersalin! ✓");
+      }
+    }
+
+    function deleteFromHistory(i) {
+      let history = JSON.parse(localStorage.getItem("gen_history") || "[]");
+      history.splice(i, 1);
+      localStorage.setItem("gen_history", JSON.stringify(history));
+      renderHistory();
+    }
+
+    function clearAll() {
+      if (!confirm("Hapus semua riwayat?")) return;
+      localStorage.removeItem("gen_history");
+      renderHistory();
+    }
+
+    // init
+    renderHistory();
+    buildURL();
+  </script>
+</body>
+</html>
