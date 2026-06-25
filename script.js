@@ -440,7 +440,6 @@ function initRSVPForm() {
           body: JSON.stringify(payload)
         });
       }
-      form.classList.add("hidden");
       const msg = attendance === "attending"
         ? I18N[App.lang]["rsvp.success"]
         : I18N[App.lang]["rsvp.successAbsent"];
@@ -779,7 +778,36 @@ function showToast(message) {
 // =====================
 // WhatsApp Share
 // =====================
+function copyLink() {
+  const url = window.location.href;
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(url).then(() => {
+      showToast("✅ Link tersalin!");
+    }).catch(() => {
+      fallbackCopy(url);
+    });
+  } else {
+    fallbackCopy(url);
+  }
+}
+
+function fallbackCopy(text) {
+  const ta = document.createElement("textarea");
+  ta.value = text;
+  ta.style.position = "fixed";
+  ta.style.opacity = "0";
+  document.body.appendChild(ta);
+  ta.select();
+  try {
+    document.execCommand("copy");
+    showToast("✅ Link tersalin!");
+  } catch { /* fail silently */ }
+  document.body.removeChild(ta);
+}
+
 function shareToWA() {
+  // Copy link first, then open WA
+  copyLink();
   const url = window.location.href;
   const guest = App.guestName;
   const text = guest
