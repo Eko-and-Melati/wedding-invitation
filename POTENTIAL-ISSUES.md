@@ -65,7 +65,7 @@ Dedup cuma pake `localStorage.getItem("rsvp_submitted")`. Guest ganti HP, clear 
 
 ---
 
-### 6. Informasi deadline H-7 tidak ditampilkan ke guest
+### 6. Informasi deadline H-7 tidak ditampilkan ke guest **[✓ FIXED]**
 PRD §6.4 RSVP deadline H-7 sudah diimplement (form closed otomatis). Tapi guest tidak dikasih tau ada deadline. Guest ngisi form, tiba-tiba closed tanpa penjelasan.
 
 **Fix:** Tampilkan info deadline di atas form RSVP: _"Konfirmasi kehadiran paling lambat 1 Agustus 2026"_ (dinamis dari tanggal event).

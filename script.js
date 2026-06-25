@@ -345,6 +345,16 @@ function initRSVPForm() {
   if (target) {
     const deadline = new Date(target.date + "T00:00:00");
     deadline.setDate(deadline.getDate() - CONFIG.rsvp.deadlineDays);
+
+    // Show deadline info
+    const deadlineEl = document.getElementById("rsvp-deadline");
+    if (deadlineEl) {
+      const d = deadline;
+      const months = ["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
+      const dateStr = `${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
+      deadlineEl.textContent = I18N[App.lang]["rsvp.deadline"].replace("{date}", dateStr);
+    }
+
     if (new Date() > deadline) {
       form.classList.add("hidden");
       closedEl.classList.remove("hidden");
