@@ -6,14 +6,10 @@ Ditemukan: 23 Jun 2026
 
 ## 🔴 Critical
 
-### 1. og:image — Preview WA/Telegram kosong
+### 1. og:image — Preview WA/Telegram kosong **[✓ FIXED]**
 Tidak ada `<meta property="og:image">`. Guest share link via WhatsApp atau Telegram → muncul URL doang tanpa gambar preview. Wedding invite channel utama adalah WA.
 
-**Fix:** Generate foto couple, simpan di `assets/og-image.jpg`, tambah:
-```html
-<meta property="og:image" content="https://eko-and-melati.github.io/wedding-invitation/assets/og-image.jpg" />
-<meta name="twitter:image" content="https://eko-and-melati.github.io/wedding-invitation/assets/og-image.jpg" />
-```
+**Fix:** Generate gambar via Playwright screenshot, simpan di `assets/og-image.jpg`, tambah meta tag `og:image`.
 
 ---
 
