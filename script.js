@@ -440,6 +440,16 @@ function initRSVPForm() {
           body: JSON.stringify(payload)
         });
       }
+
+      // Hide form, show status card
+      form.classList.add("hidden");
+      const statusEl = document.getElementById("rsvp-status");
+      const statusText = document.getElementById("rsvp-status-text");
+      statusText.textContent = attendance === "attending"
+        ? "✅ Hadir: " + partySize + " orang"
+        : "❌ Maaf, tidak bisa hadir";
+      statusEl.classList.remove("hidden");
+
       const msg = attendance === "attending"
         ? I18N[App.lang]["rsvp.success"]
         : I18N[App.lang]["rsvp.successAbsent"];
@@ -450,6 +460,16 @@ function initRSVPForm() {
       feedback.className = "form-feedback error";
       feedback.classList.remove("hidden");
     }
+  });
+
+  // Edit RSVP button — show form again
+  document.getElementById("rsvp-edit-btn").addEventListener("click", () => {
+    document.getElementById("rsvp-status").classList.add("hidden");
+    form.classList.remove("hidden");
+    const submitBtn = document.getElementById("rsvp-submit");
+    submitBtn.disabled = false;
+    const feedback = document.getElementById("rsvp-feedback");
+    feedback.className = "form-feedback hidden";
   });
 }
 

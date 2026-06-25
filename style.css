@@ -796,6 +796,43 @@ textarea, input { font-family: inherit; font-size: inherit; }
   opacity: 0.7;
 }
 
+/* RSVP Status Card */
+.rsvp-status {
+  text-align: center;
+  padding: 1.5rem;
+  border: 1px solid rgba(44,44,44,0.12);
+  border-radius: 10px;
+  background: rgba(255,255,255,0.5);
+}
+
+.rsvp-status-icon {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.rsvp-status-text {
+  font-size: 1rem;
+  margin: 0 0 1rem;
+  line-height: 1.6;
+}
+
+.btn-secondary {
+  background: transparent;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  padding: 0.5rem 1.25rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.85rem;
+  transition: background 0.2s, color 0.2s;
+}
+
+.btn-secondary:hover {
+  background: var(--accent);
+  color: #fff;
+}
+
 /* =====================
    Wishes List
    ===================== */
