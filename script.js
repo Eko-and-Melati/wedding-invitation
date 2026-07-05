@@ -294,6 +294,7 @@ function renderMaps() {
     card.className = "map-card";
     card.innerHTML = `
       <p class="map-title">${escapeHtml(title)}</p>
+      <p class="map-venue">${escapeHtml(event.venue)}</p>
       <p class="map-address">${escapeHtml(event.address)}</p>
       ${event.mapEmbedUrl
         ? `<iframe class="map-embed" src="${event.mapEmbedUrl}" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Map ${escapeHtml(event.venue)}"></iframe>`

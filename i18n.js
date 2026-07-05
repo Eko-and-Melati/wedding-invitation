@@ -2,10 +2,10 @@ const I18N = {
   id: {
     "hero.label.line1": "Kami mengundang kehadiran Bapak/Ibu/Saudara/i",
     "hero.label.line2": "pada acara akad pernikahan kami.",
-    "hero.invitationText": "Kami mengundang kehadiran Bapak/Ibu/Saudara/i pada acara akad pernikahan kami.",
+    "hero.invitationText": "Kami menyampaikan dengan hormat dan mengundang Bapak/Ibu/Saudara/i untuk menghadiri acara akad pernikahan kami.",
     "hero.announce.line1": "Bismillah, kabar bahagia pernikahan kami",
     "hero.announce.line2": "kami sampaikan dengan hormat.",
-    "cover.invitationText": "Kami mengundang kehadiran Bapak/Ibu/Saudara/i pada acara akad pernikahan kami.",
+    "cover.invitationText": "Kami menyampaikan dengan hormat dan mengundang Bapak/Ibu/Saudara/i untuk menghadiri acara akad pernikahan kami.",
     "nav.home": "Home",
     "nav.couple": "Mempelai",
     "nav.events": "Acara",
@@ -53,7 +53,7 @@ const I18N = {
     "wishes.justNow": "Baru saja",
     "wishes.error": "Gagal mengirim ucapan. Silakan coba lagi.",
     "closing.text": "Merupakan suatu kehormatan dan kebahagiaan apabila Bapak/Ibu berkenan memberikan doa restu.",
-    "closing.hormat": "Hormat kami,",
+    "closing.hormat": "Kami yang berbahagia,",
     "closing.parentsLabel": "— Orang Tua Mempelai —"
   },
   en: {
