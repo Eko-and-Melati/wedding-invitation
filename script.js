@@ -138,9 +138,15 @@ function renderConfig() {
   // Hero date & city
   if (target) {
     const d = new Date(target.date + "T00:00:00");
-    const opts = { year: "numeric", month: "long", day: "numeric" };
-    document.getElementById("hero-date").textContent =
-      d.toLocaleDateString(App.lang === "id" ? "id-ID" : "en-US", opts);
+    const weekdayOpts = { weekday: "long" };
+    const dateOpts = { year: "numeric", month: "long", day: "numeric" };
+    const locale = App.lang === "id" ? "id-ID" : "en-US";
+    const weekday = d.toLocaleDateString(locale, weekdayOpts);
+    const dateStr = d.toLocaleDateString(locale, dateOpts);
+    const fullDateStr = App.lang === "id"
+      ? `${weekday}, ${dateStr}`
+      : `${weekday}, ${dateStr}`;
+    document.getElementById("hero-date").textContent = fullDateStr;
     document.getElementById("hero-city").textContent = target.venue;
   }
 
@@ -728,19 +734,35 @@ function initOpeningCover() {
   }
 
   // Show guest name on cover
-  const openingTo = document.getElementById("opening-to");
-  if (openingTo && App.guestName) {
-    const namePart = App.guestTitle
-      ? `${App.guestTitle} ${App.guestName}`.trim()
-      : App.guestName;
-    const suffixPart = App.guestSuffix || "";
-    const prefix = I18N[App.lang]["hero.toPrefix"] || "Kepada Yth.";
-    const str = suffixPart
-      ? `${escapeHtml(prefix)} <span class="opening-to-name">${escapeHtml(namePart)}</span> <span class="hero-to-suffix">${escapeHtml(suffixPart)}</span>`
-      : `${escapeHtml(prefix)} <span class="opening-to-name">${escapeHtml(namePart)}</span>`;
-    openingTo.innerHTML = str;
-    openingTo.classList.remove("hidden");
-  }
+    const openingTo = document.getElementById("opening-to");
+    if (openingTo && App.guestName) {
+      const namePart = App.guestTitle
+        ? `${App.guestTitle} ${App.guestName}`.trim()
+        : App.guestName;
+      const suffixPart = App.guestSuffix || "";
+      const prefix = I18N[App.lang]["hero.toPrefix"] || "Kepada Yth.";
+      const nameDisplay = suffixPart
+        ? escapeHtml(namePart)
+        : escapeHtml(namePart);
+      const str = suffixPart
+        ? `${escapeHtml(prefix)} ${nameDisplay} ${escapeHtml(suffixPart)}`
+        : `${escapeHtml(prefix)} ${nameDisplay}`;
+      openingTo.innerHTML = str;
+      openingTo.classList.remove("hidden");
+    }
+
+    // Cover date & venue
+    const targetEvt = CONFIG.events.find(e => e.isCountdownTarget) || CONFIG.events[0];
+    if (targetEvt) {
+      const d = new Date(targetEvt.date + "T00:00:00");
+      const locale = App.lang === "id" ? "id-ID" : "en-US";
+      const wd = d.toLocaleDateString(locale, { weekday: "long" });
+      const dt = d.toLocaleDateString(locale, { year: "numeric", month: "long", day: "numeric" });
+      const openingDate = document.getElementById("opening-date");
+      if (openingDate) openingDate.textContent = `${wd}, ${dt}`;
+      const openingVenue = document.getElementById("opening-venue");
+      if (openingVenue) openingVenue.textContent = targetEvt.venue;
+    }
 
   cover.classList.remove("hidden");
 

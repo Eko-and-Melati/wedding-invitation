@@ -84,6 +84,29 @@
   color: var(--text);
 }
 
+.opening-couple {
+  font-family: var(--font-heading, 'Cormorant Garamond', serif);
+  font-size: clamp(1.2rem, 4.5vw, 2rem);
+  font-weight: 600;
+  margin: 0.75rem 0 0.25rem;
+  opacity: 0;
+  animation: heroFadeIn 0.5s ease-out 0.4s forwards;
+}
+
+.opening-date, .opening-venue {
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  opacity: 0;
+  animation: heroFadeIn 0.5s ease-out 0.5s forwards;
+  margin-bottom: 0.15rem;
+  line-height: 1.5;
+}
+
+.opening-venue {
+  font-size: 0.75rem;
+  opacity: 0.7;
+}
+
 /* =====================
    Section Divider
    ===================== */
