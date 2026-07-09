@@ -3,7 +3,7 @@ const I18N = {
     "hero.label.line1": "Kami mengundang kehadiran Bapak/Ibu/Saudara/i",
     "hero.label.line2": "pada acara akad pernikahan kami.",
     "hero.invitationText": "Kami menyampaikan dengan hormat dan mengundang Bapak/Ibu/Saudara/i untuk menghadiri acara akad pernikahan kami.",
-    "hero.announce.line1": "Bismillahirrohmanirrohim. Kabar bahagia pernikahan ini",
+    "hero.announce.line1": "Kabar bahagia pernikahan ini",
     "hero.announce.line2": "kami sampaikan dengan hormat.",
     "cover.invitationText": "Kami menyampaikan dengan hormat dan mengundang Bapak/Ibu/Saudara/i untuk menghadiri acara akad pernikahan kami.",
     "nav.home": "Home",
