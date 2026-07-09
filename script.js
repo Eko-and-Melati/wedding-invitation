@@ -507,7 +507,7 @@ async function loadWishes() {
       if (loadingEl) loadingEl.remove();
 
       if (!data.wishes || data.wishes.length === 0) {
-        container.innerHTML = `<p style="opacity:0.5;font-size:0.9rem">${I18N[App.lang]["wishes.empty"]}</p>`;
+        container.innerHTML = `<p class="wishes-empty" style="opacity:0.5;font-size:0.9rem">${I18N[App.lang]["wishes.empty"]}</p>`;
         return;
       }
 
