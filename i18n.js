@@ -3,7 +3,7 @@ const I18N = {
     "hero.label.line1": "Kami mengundang kehadiran Bapak/Ibu/Saudara/i",
     "hero.label.line2": "pada acara akad pernikahan kami.",
     "hero.invitationText": "Kami menyampaikan dengan hormat dan mengundang Bapak/Ibu/Saudara/i untuk menghadiri acara akad pernikahan kami.",
-    "hero.announce.line1": "Bismillah, kabar bahagia pernikahan kami",
+    "hero.announce.line1": "Bismillahirrohmanirrohim. Kabar bahagia pernikahan ini",
     "hero.announce.line2": "kami sampaikan dengan hormat.",
     "cover.invitationText": "Kami menyampaikan dengan hormat dan mengundang Bapak/Ibu/Saudara/i untuk menghadiri acara akad pernikahan kami.",
     "nav.home": "Home",
@@ -52,7 +52,7 @@ const I18N = {
     "wishes.success": "Ucapan terkirim. Terima kasih! 🤍",
     "wishes.justNow": "Baru saja",
     "wishes.error": "Gagal mengirim ucapan. Silakan coba lagi.",
-    "closing.text": "Merupakan suatu kehormatan dan kebahagiaan apabila Bapak/Ibu berkenan memberikan doa restu.",
+    "closing.text": "Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu.",
     "closing.hormat": "Kami yang berbahagia,",
     "closing.parentsLabel": "— Orang Tua Mempelai —"
   },
