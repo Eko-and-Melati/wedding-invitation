@@ -205,7 +205,7 @@
   <div class="toast-gen" id="toastGen"></div>
 
   <script>
-    const BASE = "https://eko-and-melati.github.io/wedding-invitation/";
+    const BASE = "https://ekomelwedding.site/";
 
     const titleEl = document.getElementById("title");
     const nameEl = document.getElementById("name");
@@ -290,14 +290,42 @@
       }, 2000);
     }
 
+    function buildWAText(title, name, url) {
+      const to = title ? `${title} ${name}` : name;
+      return `Assalamu'alaikum Warahmatullah Wabarakatuh
+
+Kepada Yth. Bapak/Ibu/Saudara/i:
+${to}
+
+Tanpa mengurangi rasa hormat, perkenankan kami mengundang Bapak/Ibu/Saudara/i, teman dan sahabat kami, untuk menghadiri acara pernikahan kami:
+
+Eko Rudiawan Jamzuri & Melati Budiana Putri
+
+Insya Allah akan dilaksanakan pada:
+📅 Sabtu, 8 Agustus 2026
+🕰️ 07.00 - 09.00 WIB
+📍Masjid Salman Institut Teknologi Bandung
+
+Berikut link undangan pernikahan kami:
+
+${url}
+
+Merupakan suatu kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan untuk hadir dan memberikan doa restu pada acara pernikahan kami.
+
+Terimakasih
+
+Wassalamu'alaikum Warahmatullah Wabarakatuh
+
+Hormat kami,
+Eko & Melati`;
+    }
+
     function shareWA() {
       const url = buildURL();
       if (!url) return;
       const title = titleEl.value.trim();
       const name = nameEl.value.trim();
-      const text = title
-        ? `Assalamu'alaikum,\n\nYth. ${title} ${name}\n\nKami mengundang ${title} ${name} untuk menghadiri acara pernikahan kami. Klik link berikut:\n${url}\n\n— Eko & Melati`
-        : `Assalamu'alaikum,\n\nKami mengundang ${name} untuk menghadiri acara pernikahan kami. Klik link berikut:\n${url}\n\n— Eko & Melati`;
+      const text = buildWAText(title, name, url);
       const waUrl = `https://wa.me/?text=${encodeURIComponent(text)}`;
       saveToHistory(title, name, url);
       window.open(waUrl, "_blank");
@@ -340,9 +368,7 @@
     function waFromHistory(i) {
       const h = JSON.parse(localStorage.getItem("gen_history") || "[]")[i];
       if (!h) return;
-      const text = h.title
-        ? `Assalamu'alaikum,\n\nYth. ${h.title} ${h.name}\n\nKami mengundang ${h.title} ${h.name} untuk menghadiri acara pernikahan kami. Klik link berikut:\n${h.url}\n\n— Eko & Melati`
-        : `Assalamu'alaikum,\n\nKami mengundang ${h.name} untuk menghadiri acara pernikahan kami. Klik link berikut:\n${h.url}\n\n— Eko & Melati`;
+      const text = buildWAText(h.title, h.name, h.url);
       window.open("https://wa.me/?text=" + encodeURIComponent(text), "_blank");
     }
 
