@@ -53,6 +53,7 @@ const I18N = {
     "wishes.justNow": "Baru saja",
     "wishes.error": "Gagal mengirim ucapan. Silakan coba lagi.",
     "closing.text": "Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu.",
+    "closing.text.announce": "Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan memberikan doa restu.",
     "closing.hormat": "Kami yang berbahagia,",
     "closing.parentsLabel": "— Orang Tua Mempelai —"
   },

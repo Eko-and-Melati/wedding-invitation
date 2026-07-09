@@ -109,6 +109,13 @@ function renderI18n() {
   // Update wishes empty state teks langsung tanpa re-fetch
   const wishesEmpty = document.querySelector(".wishes-empty");
   if (wishesEmpty) wishesEmpty.textContent = I18N[App.lang]["wishes.empty"];
+
+  // Closing text — mode-aware (hapus "berkenan hadir" di announce)
+  const closingText = document.querySelector('[data-i18n="closing.text"]');
+  if (closingText) {
+    const key = App.mode === "announce" ? "closing.text.announce" : "closing.text";
+    closingText.textContent = I18N[App.lang][key] || I18N[App.lang]["closing.text"] || "";
+  }
 }
 
 // =====================
