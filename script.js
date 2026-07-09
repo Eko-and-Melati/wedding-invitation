@@ -119,18 +119,21 @@ function renderConfig() {
   const target = events.find(e => e.isCountdownTarget) || events[0];
 
   // Couple names
+  const lang = App.lang;
+  const resolveL10n = (val) => typeof val === "object" ? (val[lang] || val["id"]) : val;
+
   document.getElementById("groom-name").textContent = couple.groom.name;
   document.getElementById("bride-name").textContent = couple.bride.name;
   document.getElementById("groom-fullname").textContent = couple.groom.fullName;
   document.getElementById("bride-fullname").textContent = couple.bride.fullName;
-  document.getElementById("groom-prefix").textContent = couple.groom.parentsPrefix || "";
-  document.getElementById("bride-prefix").textContent = couple.bride.parentsPrefix || "";
-  document.getElementById("groom-parents").textContent = couple.groom.parents;
-  document.getElementById("bride-parents").textContent = couple.bride.parents;
+  document.getElementById("groom-prefix").textContent = resolveL10n(couple.groom.parentsPrefix) || "";
+  document.getElementById("bride-prefix").textContent = resolveL10n(couple.bride.parentsPrefix) || "";
+  document.getElementById("groom-parents").textContent = resolveL10n(couple.groom.parents);
+  document.getElementById("bride-parents").textContent = resolveL10n(couple.bride.parents);
   document.getElementById("closing-groom").textContent = couple.groom.name;
   document.getElementById("closing-bride").textContent = couple.bride.name;
   document.getElementById("closing-parents-text").innerHTML =
-    `${escapeHtml(couple.groom.parents)}<br>${escapeHtml(couple.bride.parents)}`;
+    `${escapeHtml(resolveL10n(couple.groom.parents))}<br>${escapeHtml(resolveL10n(couple.bride.parents))}`;
 
   // Hero date & city
   if (target) {

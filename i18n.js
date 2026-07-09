@@ -60,8 +60,8 @@ const I18N = {
     "hero.label.line1": "We humbly invite you",
     "hero.label.line2": "to our wedding ceremony.",
     "hero.invitationText": "We humbly invite you to our wedding ceremony.",
-    "hero.announce.line1": "With joy, we share our wedding announcement",
-    "hero.announce.line2": "and warmly invite your blessings.",
+    "hero.announce.line1": "With joyful hearts, we announce our wedding",
+    "hero.announce.line2": "and warmly request your prayers and blessings.",
     "cover.invitationText": "We humbly invite you to our wedding ceremony.",
     "hero.cta": "Open Invitation",
     "hero.toPrefix": "Dear:",
@@ -107,8 +107,8 @@ const I18N = {
     "wishes.success": "Wish sent. Thank you! 🤍",
     "wishes.justNow": "Just now",
     "wishes.error": "Failed to send. Please try again.",
-    "closing.text": "It is an honor and joy if you would kindly grant your prayers and blessings.",
-    "closing.hormat": "Respectfully,",
+    "closing.text": "Your blessings and prayers mean the world to us as we begin this new journey.",
+    "closing.hormat": "Warm regards,",
     "closing.parentsLabel": "— Parents of the Bride & Groom —"
   }
 };
