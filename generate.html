@@ -103,6 +103,36 @@
       color: #fff;
     }
     .btn-wa:hover { box-shadow: 0 2px 12px rgba(37,211,102,0.4); }
+    .text-preview {
+      display: none;
+      margin-top: 1.25rem;
+      background: #f5f2ec;
+      border: 1px dashed #d5d0c8;
+      border-radius: 10px;
+      padding: 1rem;
+      text-align: left;
+      font-size: 0.82rem;
+      color: #444;
+      line-height: 1.7;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    .btn-copy-text {
+      display: none;
+      width: 100%;
+      margin-top: 0.6rem;
+      padding: 0.65rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 10px;
+      background: #e8e4dc;
+      color: #333;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .btn-copy-text:hover { background: #ddd8ce; }
+    .btn-copy-text.copied { background: #4caf50; color: #fff; }
     .saved-list {
       margin-top: 1.75rem;
       text-align: left;
@@ -195,6 +225,9 @@
       <button class="btn-wa" id="btnWA" onclick="shareWA()">⬇ Bagikan WA</button>
     </div>
 
+    <div class="text-preview" id="textPreview"></div>
+    <button class="btn-copy-text" id="btnCopyText" onclick="copyText()">📋 Salin Teks WA</button>
+
     <div class="saved-list" id="savedSection" style="display:none">
       <h3>🕓 Riwayat</h3>
       <div id="savedList"></div>
@@ -246,6 +279,13 @@
       if (title) params.push("title=" + encodeURIComponent(title));
       url += "?" + params.join("&");
       urlDisplay.textContent = url;
+      // Update text preview
+      const preview = document.getElementById("textPreview");
+      const btnCopyText = document.getElementById("btnCopyText");
+      const waText = buildWAText(title, name, url);
+      preview.textContent = waText;
+      preview.style.display = "block";
+      btnCopyText.style.display = "block";
       return url;
     }
 
@@ -318,6 +358,39 @@ Wassalamu'alaikum Warahmatullah Wabarakatuh
 
 Hormat kami,
 Eko & Melati`;
+    }
+
+    function copyText() {
+      const preview = document.getElementById("textPreview");
+      const btn = document.getElementById("btnCopyText");
+      const text = preview.textContent;
+      if (!text) return;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(() => {
+          btn.textContent = "✅ Teks Tersalin!";
+          btn.classList.add("copied");
+          showToast("Teks WA tersalin! ✓");
+          setTimeout(() => {
+            btn.textContent = "📋 Salin Teks WA";
+            btn.classList.remove("copied");
+          }, 2000);
+        });
+      } else {
+        const range = document.createRange();
+        range.selectNodeContents(preview);
+        const sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+        document.execCommand("copy");
+        sel.removeAllRanges();
+        btn.textContent = "✅ Teks Tersalin!";
+        btn.classList.add("copied");
+        showToast("Teks WA tersalin! ✓");
+        setTimeout(() => {
+          btn.textContent = "📋 Salin Teks WA";
+          btn.classList.remove("copied");
+        }, 2000);
+      }
     }
 
     function shareWA() {
